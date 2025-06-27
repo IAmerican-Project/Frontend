@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Bono Corporativo</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="bonus-simulation.css">
+</head>
+<body>
+<h1 class="title">Simulación de Bono Corporativo</h1>
+<h2 class="title2">Ingrese los datos</h2>
+<hr class="divider">
+
+<div class="cuadro-texto">Datos del bono</div>
+<div class="contenedor-doble">
+    <div class="columna">
+        <div class="campo">
+            <label for="valor_nominal_bono">Valor Nominal del Bono</label>
+            <input type="number" id="valor_nominal_bono" placeholder="1000.00" [(ngModel)]="valor_nominal_bono">
+        </div>
+        <div class="campo">
+            <label for="precio_comercial">Precio Comercial</label>
+            <input type="number" id="precio_comercial" placeholder="1050.00" [(ngModel)]="precio_comercial">
+        </div>
+        <div class="campo">
+            <label for="duracion">Duración (años)</label>
+            <input type="number" id="duracion" placeholder="3" [(ngModel)]="duracion">
+        </div>
+        <div class="campo">
+            <label for="frecuencia_cupones">Frecuencia de cupones (días)</label>
+            <select id="frecuencia_cupones" [(ngModel)]="frecuencia_cupones">
+                <option [ngValue]="30">30</option>
+                <option [ngValue]="60">60</option>
+                <option [ngValue]="90">90</option>
+                <option [ngValue]="180">180</option>
+                <option [ngValue]="360">360</option>
+            </select>
+        </div>
+        <div class="campo">
+            <label for="fecha_emision">Fecha de Emisión</label>
+            <input type="date" id="fecha_emision"  placeholder="2022-05-01" [(ngModel)]="fecha_emision">
+        </div>
+    </div>
+
+    <div class="columna">
+        <div class="campo">
+            <label for="tipo_tasa">Tipo de tasa</label>
+            <select id="tipo_tasa" [(ngModel)]="tipo_tasa">
+                <option value="Nominal">Nominal</option>
+                <option value="Efectiva">Efectiva</option>
+            </select>
+        </div>
+        <div class="campo">
+            <label for="dias_capitalizacion">Días de capitalización</label>
+            <input type="number" id="dias_capitalizacion" placeholder="60" [(ngModel)]="dias_capitalizacion">
+        </div>
+        <div class="campo">
+            <label for="tasa_anual">Tasa Anual (%)</label>
+            <input type="number" id="tasa_anual" placeholder="9.00" [(ngModel)]="tasa_anual">
+        </div>
+        <div class="campo">
+            <label for="tasa_descuento">Tasa de descuento para bonista (%)</label>
+            <input type="number" id="tasa_descuento" placeholder="6.00" [(ngModel)]="tasa_descuento">
+        </div>
+        <div class="campo">
+            <label for="impuesto_renta">Impuesto a la renta (%)</label>
+            <input type="number" id="impuesto_renta" placeholder="30.00" [(ngModel)]="impuesto_renta">
+        </div>
+    </div>
+</div>
+
+<div class="contenedor-flex-horizontal">
+    <div class="seccion-gastos">
+        <div class="cuadro-texto2">Gastos Iniciales del Emisor</div>
+        <div class="campo">
+            <label for="prima">% Prima</label>
+            <input type="number" id="prima" placeholder="1.00" [(ngModel)]="prima">
+        </div>
+        <div class="campo">
+            <label for="estructuracion">% Estructuración</label>
+            <input type="number" id="estructuracion" placeholder="0.25" [(ngModel)]="estructuracion">
+        </div>
+        <div class="campo">
+            <label for="colocacion">% Colocación</label>
+            <input type="number" id="colocacion" placeholder="0.25" [(ngModel)]="colocacion">
+        </div>
+        <div class="campo">
+            <label for="flotacion">% Flotación</label>
+            <input type="number" id="flotacion" placeholder="0.15" [(ngModel)]="flotacion">
+        </div>
+        <div class="campo">
+            <label for="cavali">% CAVALI</label>
+            <input type="number" id="cavali" placeholder="0.50" [(ngModel)]="cavali">
+        </div>
+    </div>
+
+    <div class="seccion-parametros">
+        <div class="cuadro-texto2">Parámetros Generales</div>
+        <div class="campo">
+            <label for="moneda">Moneda</label>
+            <input type="text" id="moneda" placeholder="S/ - $ - €" [(ngModel)]="moneda">
+        </div>
+        <div class="campo">
+            <label for="dias_anio">Días por año</label>
+            <input type="text" id="dias_anio" placeholder="360 / 365" [(ngModel)]="dias_anio">
+        </div>
+        <div class="campo">
+            <label for="tasa_igv">Tasa de IGV (%)</label>
+            <input type="number" id="tasa_igv" placeholder="8.00" [(ngModel)]="tasa_igv">
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

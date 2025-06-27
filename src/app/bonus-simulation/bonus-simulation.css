@@ -1,0 +1,85 @@
+body {
+    font-family: "DM Sans", sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.title {
+    text-align: center;
+}
+
+.title2 {
+    font-family: "DM Sans", sans-serif;
+}
+
+.cuadro-texto, .cuadro-texto2 {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 20px 0 10px;
+    background-color: #633CF3;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 16px;
+    width: 100%;
+    text-align: left;
+}
+
+.campo {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.contenedor-doble {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.columna {
+    flex: 1;
+    min-width: 300px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.contenedor-flex-horizontal {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.seccion-gastos,
+.seccion-parametros {
+    flex: 1;
+    min-width: 300px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
