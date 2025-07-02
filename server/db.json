@@ -1,0 +1,12 @@
+{
+  "parametros_sistema": [
+    {
+      "currency_default": "Sol peruano",
+      "days_in_year": 363,
+      "vat_rate": 4,
+      "income_tax_rate": 3,
+      "parametro_id": 1,
+      "id": "1"
+    }
+  ]
+}

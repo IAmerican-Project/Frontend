@@ -1,0 +1,55 @@
+/* Contenedor tipo “card” */
+.config-card {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 32px 24px;
+    background-color: var(--color-bg-card);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+/* Título centrado y con color */
+.config-card__title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* Cada campo con su espacio */
+.config-card__field {
+    margin-bottom: 20px;
+}
+
+/* Inputs redondeados */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    border-radius: 8px;
+}
+
+/* Etiquetas y texto */
+.mat-form-field label {
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+/* Ancho completo para los form-fields */
+.full-width {
+    width: 100%;
+}
+
+/* Botón primario */
+.config-card__button {
+    width: 100%;
+    padding: 12px 0;
+    background-color: var(--color-primary) !important;
+    color: #fff !important;
+    font-weight: 600;
+    border-radius: 24px;
+    transition: background-color 0.2s ease;
+}
+
+/* Efecto hover */
+.config-card__button:hover {
+    background-color: var(--color-primary-d) !important;
+}

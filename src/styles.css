@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --color-primary:   #6C63FF; /* reemplaza por el purple exacto de tu home/login */
+    --color-primary-d: #5A55CC; /* versión dark si la tienes */
+    --color-bg-card:   #ffffff;
+    --color-text:      #333333;
+    --color-border:    #dddddd;
+}
