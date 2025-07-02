@@ -1,0 +1,67 @@
+<div class="register-container">
+    <header class="header">
+        <div class="logo">BonoPro</div>
+    </header>
+
+    <main class="form-wrapper">
+        <div class="form-card">
+            <h2 class="form-title">Registrarse</h2>
+
+            <form (submit)="onSubmit($event)">
+                <label for="firstName">Nombres</label>
+                <div class="input-icon">
+                    <input id="firstName" type="text" placeholder="Tu nombre" required />
+                </div>
+
+                <label for="lastName">Apellidos</label>
+                <div class="input-icon">
+                    <input id="lastName" type="text" placeholder="Tus apellidos" required />
+                </div>
+
+                <label for="email">Correo electrónico</label>
+                <div class="input-icon">
+                    <input id="email" type="email" placeholder="correo@example.com" required />
+                </div>
+                <label for="password">Contraseña</label>
+                <div class="input-icon">
+                    <input
+                            id="password"
+                            [type]="showPassword ? 'text' : 'password'"
+                            placeholder="********"
+                            required />
+                    <span class="material-icons" (click)="togglePassword()">
+            {{ showPassword ? 'visibility_off' : 'visibility' }}
+          </span>
+                </div>
+
+                <label for="confirmPassword">Confirmar Contraseña</label>
+                <div class="input-icon">
+                    <input
+                            id="confirmPassword"
+                            [type]="showConfirmPassword ? 'text' : 'password'"
+                            placeholder="********"
+                            required />
+                    <span class="material-icons" (click)="toggleConfirmPassword()">
+            {{ showConfirmPassword ? 'visibility_off' : 'visibility' }}
+          </span>
+                </div>
+
+                <button type="submit" class="submit-button">Registrarse</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div><strong>BonoPro</strong></div>
+        <div>
+            <strong>About</strong><br />
+            Features<br />
+            Support
+        </div>
+        <div>
+            <strong>Blog</strong><br />
+            Products<br />
+            Technology
+        </div>
+    </footer>
+</div>

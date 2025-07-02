@@ -1,0 +1,150 @@
+/* Contenedor general */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header superior */
+.header {
+    padding: 2rem 3rem 1rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* Card centrada */
+.login-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tarjeta de login */
+.login-card form,
+.login-card h2 {
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-card h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #fff;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* Inputs */
+input {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    flex: 1;
+    padding-right: 2rem;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    user-select: none;
+    color: #444;
+}
+
+/* Botón */
+.btn-login {
+    background-color: #5e3dea;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-login:hover {
+    background-color: #3b27b3;
+}
+
+/* Texto debajo */
+.register-text {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+}
+
+.register-text a {
+    color: #4f46e5;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 4px;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+    color: #3f35d3;
+}
+
+/* Footer */
+.footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    font-size: 0.9rem;
+    color: #333;
+    border-top: 1px solid #eee;
+}
+.input-wrapper,
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.input-wrapper input,
+.password-wrapper input {
+    width: 100%;
+    padding-right: 2rem;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #444;
+    user-select: none;
+}
+
