@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import {DataService} from "../services/data.service";
 
 @Component({
   selector: 'app-bonus-simulation',
@@ -9,26 +11,47 @@ import { CommonModule } from '@angular/common';
   templateUrl: 'bonus-simulation.html',
   styleUrls: ['bonus-simulation.css']
 })
-export class BonusSimulation {
+export class CalculadoraMultiplicacion {
+  constructor(private dataService: DataService, private router: Router) {}
 
   precio_comercial: number | null = null;
-  duracion: number | null = null;
+  cantidad_anios: number | null = null;
+  dias_anio: number = 360;
   frecuencia_cupones: number = 30;
   fecha_emision: string = '';
   estructuracion: number | null = null;
   colocacion: number | null = null;
   flotacion: number | null = null;
   cavali: number | null = null;
-  dias_capitalizacion: number | null = null;
+  dias_capitalizacion: number = 1;
   tipo_tasa: string = 'Efectiva';
   tasa_anual: number | null = null;
   tasa_descuento: number | null = null;
   impuesto_renta: number | null = null;
-  moneda: number | null = null;
-  dias_anio: number | null = null;
-  tasa_igv: number | null = null;
   prima: number | null = null;
   valor_nominal_bono: number | null = null;
+
+  guardarDatos(): void {
+    this.dataService.datosCalculadora = {
+      valor_comercial: this.precio_comercial,
+      valor_nominal_bono: this.valor_nominal_bono,
+      numero_anio: this.cantidad_anios,
+      frecuencia_cupon: this.frecuencia_cupones,
+      dias_anio: this.dias_anio,
+      tipo_tasa_interes: this.tipo_tasa,
+      dias_capitalizacion: this.dias_capitalizacion,
+      tasa_interes: (this.tasa_anual ?? 0) / 100,
+      tasa_anual_descuento: (this.tasa_descuento ?? 0) / 100,
+      impuesto_renta: (this.impuesto_renta ?? 0) / 100,
+      prima: (this.prima ?? 0) / 100,
+      estructuracion: (this.estructuracion ?? 0) / 100,
+      colocacion: (this.colocacion ?? 0) / 100,
+      flotacion: (this.flotacion ?? 0) / 100,
+      cavali: (this.cavali ?? 0) / 100
+    };
+
+    this.router.navigate(['/results']);
+  }
 
   get primaDecimal(): number {
     return (this.prima ?? 0) / 100;
@@ -48,5 +71,15 @@ export class BonusSimulation {
 
   get cavaliDecimal(): number {
     return (this.cavali ?? 0) / 100;
+  }
+
+  get tasaEfectivaAnual(): number | null {
+    if (this.tasa_anual == null || this.tipo_tasa !== 'Nominal' || !this.dias_capitalizacion) {
+      return this.tasa_anual ?? null;
+    }
+    const m = 360 / this.dias_capitalizacion;
+    const tasaNominalDecimal = this.tasa_anual / 100;
+    const tasaEfectiva = (Math.pow(1 + tasaNominalDecimal / m, m) - 1) * 100;
+    return parseFloat(tasaEfectiva.toFixed(6));
   }
 }

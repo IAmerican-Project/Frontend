@@ -1,0 +1,79 @@
+body {
+    font-family: "DM Sans", sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.divider {
+    border: none;
+    height: 2px;
+    background-color: #ccc;
+    margin-bottom: 30px;
+}
+
+/* Clase base compartida */
+.cuadro-estilo {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
+    margin: 20px 0 10px;
+}
+
+/* Diferencias visuales */
+.cuadro-texto {
+    background-color: #633CF3;
+    font-size: 16px;
+}
+
+.cuadro-texto2 {
+    background-color: #3B28CC;
+    font-size: 14px;
+}
+
+.contenedor-doble {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.columna {
+    flex: 1;
+    min-width: 300px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.campo {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.campo input {
+    width: 100%;
+    padding: 8px;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #333;
+    font-weight: 500;
+}

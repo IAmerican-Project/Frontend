@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Resultados del Bono</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="results.css"/>
+</head>
+<body>
+<h1 class="title">Resultados de la Simulación</h1>
+<hr class="divider" />
+
+<div class="cuadro-estilo cuadro-texto">Resultados de la estructuración del bono</div>
+<div class="contenedor-doble">
+    <div class="columna">
+        <div class="campo">
+            <label>Tasa efectiva anual</label>
+            <input type="number" id="tasa_efectiva" [(ngModel)]="tasa_efectiva_anual">
+        </div>
+        <div class="campo">
+            <label>Costes Iniciales Emisor</label>
+            <input type="number" id="costos_iniciales" [(ngModel)]="costes_iniciales_emisor">
+        </div>
+        <div class="campo">
+            <label>Nº Períodos por Año</label>
+            <input type="number" [(ngModel)]="numero_periodos_anio">
+        </div>
+        <div class="campo">
+            <label>Nº Total de Períodos</label>
+            <input type="number" [(ngModel)]="total_periodos">
+        </div>
+    </div>
+    <div class="columna">
+        <div class="campo">
+            <label>Costes Iniciales Bonista</label>
+            <input type="number" id="costes_iniciales" [(ngModel)]="costes_iniciales_bonista">
+        </div>
+        <div class="campo">
+            <label>Tasa efectiva</label>
+            <input type="number" [(ngModel)]="tasa_efectiva">
+        </div>
+        <div class="campo">
+            <label>COK</label>
+            <input type="number" [(ngModel)]="cok">
+        </div>
+    </div>
+</div>
+
+<div class="cuadro-estilo cuadro-texto2">Resultados del Precio Actual y Utilidad</div>
+<div class="contenedor-doble">
+    <div class="columna">
+        <div class="campo">
+            <label>Precio Actual</label>
+            <input type="number" id="precio_actual" [(ngModel)]="precio_actual">
+        </div>
+        <div class="campo">
+            <label>Utilidad / Pérdida</label>
+            <input type="number" id="utilidad" [(ngModel)]="utilidad">
+        </div>
+    </div>
+</div>
+
+<div class="cuadro-estilo cuadro-texto2">Resultados de Ratios de Decisión</div>
+<div class="contenedor-doble">
+    <div class="columna">
+        <div class="campo">
+            <label>Duración</label>
+            <input type="number" id="duracion" [(ngModel)]="duracion">
+        </div>
+        <div class="campo">
+            <label>Convexidad</label>
+            <input type="number" id="convexidad" [(ngModel)]="convexidad">
+        </div>
+    </div>
+    <div class="columna">
+        <div class="campo">
+            <label>Total</label>
+            <input type="number" id="total_ratios" [(ngModel)]="total_ratios">
+        </div>
+        <div class="campo">
+            <label>Duración Modificada</label>
+            <input type="number" id="duracion_modificada" [(ngModel)]="duracion_modificada">
+        </div>
+    </div>
+</div>
+
+<div class="cuadro-estilo cuadro-texto2">Resultados de Indicadores de Rentabilidad</div>
+<div class="contenedor-doble">
+    <div class="columna">
+        <div class="campo">
+            <label>TCEA Emisor</label>
+            <input type="number" id="tce" [(ngModel)]="tce">
+        </div>
+        <div class="campo">
+            <label>TREA Bonista</label>
+            <input type="number" id="trea" [(ngModel)]="trea">
+        </div>
+    </div>
+    <div class="columna">
+        <div class="campo">
+            <label>TCEA Emisor c/Escudo</label>
+            <input type="number" id="tcea" [(ngModel)]="tcea">
+        </div>
+    </div>
+</div>
+</body>
+</html>
