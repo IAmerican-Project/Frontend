@@ -224,9 +224,6 @@ export class TablaFlujoComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-
-
-
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

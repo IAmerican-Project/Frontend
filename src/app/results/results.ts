@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {DataService} from "../services/data.service";
-import {TablaFlujoComponent} from "../public/tablaamericano/tablaamericano";
+import { DataService } from "../services/data.service";
+import { TablaFlujoComponent } from "../public/tablaamericano/tablaamericano";
+import { BondDataService } from "../services/bond-data.service";
 
 @Component({
   selector: 'app-results',
@@ -32,8 +33,12 @@ export class Results {
   tasa_efectiva: any;
   cok: any;
 
-  constructor(private dataService: DataService) {
+  constructor(
+      private dataService: DataService,
+      private bondService: BondDataService
+  ) {
     const datos = this.dataService.datosCalculadora;
+
     this.costes_iniciales_emisor = this.calcularCostosInicialesEmisor(datos);
     this.costes_iniciales_bonista = this.calcularCostosInicialesBonista(datos);
     this.numero_periodos_anio = this.numeroPeriodosAnio(datos);
@@ -41,13 +46,57 @@ export class Results {
     this.cok = this.Cok(datos);
     this.tasa_efectiva_anual = this.tasaEfectivaAnual(datos);
     this.tasa_efectiva = this.tasaEfectiva(datos);
+
+    const bondData = {
+      valorNominal: 1000.00,
+      valorComercial: 1050.00,
+      numeroAnios: 3,
+      frecuenciaCupon: 180,
+      diasCapitalizacion: 60,//<-- Días de capitalización
+      frecuenciaCuponTexto: '',
+      diasAnio: 360,
+      tasaEfectivaAnual: 0.09,
+      tipoTasaInteres: '',
+      capitalizacion: '', //dias de capitalizacion
+      tasaInteres: 0.09,
+      tasaDescuentoAnual: 0.06,
+      impuestoRenta: 0.30,
+      fechaEmision: '05-01-2022',
+      prima: 0.01,
+      estructuracion: 0.0045,
+      colocacion: 0.0025,
+      flotacion: 0.0015,
+      cavali: 0.005,
+      costesInicialesEmisor: 14.175,
+      costesInicialesBonista: 6.83,
+      numeroPeriodosAnio: this.numero_periodos_anio,
+      numeroTotalPeriodos:  this.total_periodos,
+      tasaEfectivaSemestral: this.tasa_efectiva,
+      cokSemestral: this.cok,
+      precioActual:0,
+      utilidad:0,
+      duracion:0,
+      convexidad: 0,
+      duracionModificada: 0,
+      tceaEmisor: 0,
+      tceaEmisorEscudo: 0,
+      treaBonista: 0
+    };
+
+    this.bondService.setBondData(bondData);
   }
 
-  totalPeriodos(datos: any): number {
-    const { numero_anio } = datos;
-    const periodosPorAnio = this.numeroPeriodosAnio(datos);
-    const total = periodosPorAnio * numero_anio;
+  // 🔧 Métodos auxiliares que faltaban
 
+  calcularCostosInicialesEmisor(datos: any): number {
+    const { estructuracion, colocacion, flotacion, cavali, valor_comercial } = datos;
+    const total = ((estructuracion ?? 0) + (colocacion ?? 0) + (flotacion ?? 0) + (cavali ?? 0)) * valor_comercial;
+    return Number(total.toFixed(2));
+  }
+
+  calcularCostosInicialesBonista(datos: any): number {
+    const { flotacion, cavali, valor_comercial } = datos;
+    const total = ((flotacion ?? 0) + (cavali ?? 0)) * valor_comercial;
     return Number(total.toFixed(2));
   }
 
@@ -57,14 +106,10 @@ export class Results {
     return Number(total.toFixed(2));
   }
 
-  calcularCostosInicialesEmisor(datos: any): number {
-    const { estructuracion, colocacion, flotacion, cavali, valor_comercial } = datos;
-    const total = ((estructuracion ?? 0) + (colocacion ?? 0) + (flotacion ?? 0) + (cavali ?? 0))*valor_comercial;
-    return Number(total.toFixed(2));
-  }
-  calcularCostosInicialesBonista(datos: any): number {
-    const { flotacion, cavali, valor_comercial } = datos;
-    const total = ((flotacion ?? 0) + (cavali ?? 0))*valor_comercial;
+  totalPeriodos(datos: any): number {
+    const { numero_anio } = datos;
+    const periodosPorAnio = this.numeroPeriodosAnio(datos);
+    const total = periodosPorAnio * numero_anio;
     return Number(total.toFixed(2));
   }
 
@@ -74,14 +119,11 @@ export class Results {
     return Number(total.toFixed(6));
   }
 
-
   tasaEfectivaAnual(datos: any): number {
     const { dias_anio, tipo_tasa_interes, tasa_interes, dias_capitalizacion } = datos;
-
     if (tipo_tasa_interes === 'Efectiva') {
       return Number(tasa_interes.toFixed(6));
     }
-
     const m = dias_anio / dias_capitalizacion;
     const tasa_efectiva = Math.pow(1 + (tasa_interes / m), m) - 1;
     return Number(tasa_efectiva.toFixed(6));
@@ -89,12 +131,9 @@ export class Results {
 
   tasaEfectiva(datos: any): number {
     const { dias_anio, frecuencia_cupon } = datos;
-
     const tasa_efectiva_anual = this.tasaEfectivaAnual(datos);
     const exponente = frecuencia_cupon / dias_anio;
     const tasa_semestral = Math.pow(1 + tasa_efectiva_anual, exponente) - 1;
-
     return Number(tasa_semestral.toFixed(6));
   }
-
 }

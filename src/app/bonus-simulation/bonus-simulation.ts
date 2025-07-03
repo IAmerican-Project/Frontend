@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {DataService} from "../services/data.service";
+import {BondDataService} from "../services/bond-data.service";
 
 @Component({
   selector: 'app-bonus-simulation',
@@ -12,7 +13,7 @@ import {DataService} from "../services/data.service";
   styleUrls: ['bonus-simulation.css']
 })
 export class CalculadoraMultiplicacion {
-  constructor(private dataService: DataService, private router: Router) {}
+  constructor(private dataService: DataService, private router: Router, private bondDataService: BondDataService) { }
 
   precio_comercial: number | null = null;
   cantidad_anios: number | null = null;
@@ -49,6 +50,8 @@ export class CalculadoraMultiplicacion {
       flotacion: (this.flotacion ?? 0) / 100,
       cavali: (this.cavali ?? 0) / 100
     };
+
+
 
     this.router.navigate(['/results']);
   }
