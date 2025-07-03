@@ -43,9 +43,9 @@ export class Results {
     this.costes_iniciales_bonista = this.calcularCostosInicialesBonista(datos);
     this.numero_periodos_anio = this.numeroPeriodosAnio(datos);
     this.total_periodos = this.totalPeriodos(datos);
-    this.cok = this.Cok(datos);
-    this.tasa_efectiva_anual = this.tasaEfectivaAnual(datos);
-    this.tasa_efectiva = this.tasaEfectiva(datos);
+    this.cok = this.Cok(datos);//
+    this.tasa_efectiva_anual = this.tasaEfectivaAnual(datos);//
+    this.tasa_efectiva = this.tasaEfectiva(datos); //
 
     const bondData = {
       valorNominal: 1000.00,
@@ -55,7 +55,7 @@ export class Results {
       diasCapitalizacion: 60,//<-- Días de capitalización
       frecuenciaCuponTexto: '',
       diasAnio: 360,
-      tasaEfectivaAnual: 0.09,
+      tasaEfectivaAnual: this.tasa_efectiva_anual,
       tipoTasaInteres: '',
       capitalizacion: '', //dias de capitalizacion
       tasaInteres: 0.09,
@@ -67,8 +67,8 @@ export class Results {
       colocacion: 0.0025,
       flotacion: 0.0015,
       cavali: 0.005,
-      costesInicialesEmisor: 14.175,
-      costesInicialesBonista: 6.83,
+      costesInicialesEmisor: this.costes_iniciales_emisor,
+      costesInicialesBonista: this.costes_iniciales_bonista,
       numeroPeriodosAnio: this.numero_periodos_anio,
       numeroTotalPeriodos:  this.total_periodos,
       tasaEfectivaSemestral: this.tasa_efectiva,
