@@ -1,0 +1,110 @@
+
+.mat-elevation-z8 {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.mat-header-cell {
+  background-color: #f9fafc;
+  font-weight: 600;
+  font-size: 15px;
+  color: #2a3f54;
+  text-transform: uppercase;
+  padding: 14px 12px;
+  border-bottom: 2px solid #dfe3e8;
+}
+
+/* Estilo para cada nombre de columna con color personalizado */
+.mat-header-cell::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #005792; /* línea inferior azul sutil */
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.mat-header-cell:hover::after {
+  transform: scaleX(1);
+}
+
+/* Celdas con espaciado y colores suaves */
+.mat-cell {
+  padding: 14px 12px;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #eceff1;
+}
+
+/* Hover moderno para filas */
+.mat-row:hover {
+  background-color: #f0f4f8;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Celdas vacías con un fondo más sutil */
+.empty-cell {
+  background-color: #fffbe6 !important;
+  color: #99999900;
+  font-style: italic;
+}
+
+/* Números negativos */
+.negative {
+  color: #c62828;
+  font-weight: bold;
+}
+
+/* Centrados */
+.center-header,
+.center-cell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Alineación a la derecha */
+.right-align {
+  text-align: right;
+  vertical-align: middle;
+}
+
+/* Estilo para mat-select dentro de la tabla */
+.mat-form-field.mat-form-field-appearance-fill .mat-select {
+  background-color: #f5f7fa;
+  border-radius: 4px;
+}
+
+/* Select más limpio y sin sombras duras */
+.mat-select-panel {
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+/* Estilo general del encabezado con color específico */
+.mat-header-cell {
+  background-color: #f9fafc;
+  font-weight: 600;
+  font-size: 15px;
+  color: #4cb2d3; /* Color aplicado al texto de los encabezados */
+  text-transform: uppercase;
+  padding: 14px 12px;
+  border-bottom: 2px solid #dfe3e8;
+}
+
+.mat-header-cell::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #4cb2d3;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.mat-header-cell:hover::after {
+  transform: scaleX(1);
+}

@@ -1,0 +1,152 @@
+<mat-form-field appearance="outline">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 2025" #input />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="nro">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Nº</th>
+      <td mat-cell *matCellDef="let row" class="center-cell">{{ row.nro }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaProgramada">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-header">Fecha Programada</th>
+      <td mat-cell *matCellDef="let row" class="center-cell">
+        {{ formatDate(row.fechaProgramada) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="inflacionAnual">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-cell">Inflación Anual</th>
+      <td mat-cell *matCellDef="let row"
+          class="center-cell"
+          [ngClass]="{
+        'empty-cell': row.nro === 0 && row.inflacionAnual === null,
+        'negative': row.inflacionAnual !== null && row.inflacionAnual < 0
+      }">
+        {{ row.inflacionAnual !== null ? formatNumberWithStyle(row.inflacionAnual) : '' }}%
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="inflacionSemestral">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Inflación Semestral</th>
+      <td mat-cell *matCellDef="let row"  class="center-cell" [ngClass]="{ 'empty-cell': row.nro === 0 && row.inflacionSemestral === null }">
+        {{ row.inflacionSemestral !== null ? roundUpThreeDecimals(row.inflacionSemestral) + '%' : '' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="plazoGracia">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-cell">Plazo de Gracia</th>
+      <td mat-cell *matCellDef="let row" class="center-cell" [ngClass]="{ 'empty-cell': row.plazoGracia === null }">
+        <mat-form-field appearance="fill">
+          <mat-select [(value)]="row.plazoGracia" [disabled]="row.nro === 0" (selectionChange)="onChangePlazoGracia($event.value, row)">
+            <mat-option value="T">T</mat-option>
+            <mat-option value="S">S</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="bono">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Bono</th>
+      <td mat-cell *matCellDef="let row"class="right-align" [ngClass]="{ 'empty-cell': row.nro === 0 && row.bono === null ,'negative': row.bono! < 0 }">
+        {{ formatNumberWithStyle(row.bono) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bonoIndexado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Bono Indexado</th>
+      <td mat-cell *matCellDef="let row"class="right-align"[ngClass]="{ 'empty-cell': row.nro === 0 && row.bonoIndexado === null,'negative': row.bonoIndexado! < 0  }">
+        {{ formatNumberWithStyle(row.bonoIndexado) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cupon">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Cupon (Interés)</th>
+      <td mat-cell *matCellDef="let row"class="right-align"[ngClass]="{ 'empty-cell': row.nro === 0 && row.cupon === null,'negative': row.cupon! < 0  }">
+        {{ formatNumberWithStyle(row.cupon) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cuota">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Cuota</th>
+      <td mat-cell *matCellDef="let row"class="right-align"[ngClass]="{ 'empty-cell': row.nro === 0 && row.cuota === null,'negative': row.cuota! < 0  }">
+        {{formatNumberWithStyle( row.cuota) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amortizacion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Amort.</th>
+      <td mat-cell *matCellDef="let row"class="right-align"[ngClass]="{ 'empty-cell': row.nro === 0 && row.amortizacion === null,'negative': row.amortizacion! < 0  }">
+        {{formatNumberWithStyle( row.amortizacion) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="prima">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Prima</th>
+      <td mat-cell *matCellDef="let row"class="right-align"[ngClass]="{ 'empty-cell': row.nro === 0 && row.prima === null,'negative': row.prima! < 0  }">
+        {{ formatNumberWithStyle(row.prima) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="escudo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-cell">Escudo</th>
+      <td mat-cell *matCellDef="let row" class="right-align"[ngClass]="{ 'empty-cell': row.nro === 0 && row.escudo === null,'negative': row.escudo! < 0  }">
+        {{ formatNumberWithStyle(row.escudo) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="flujoEmisor" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Flujo Emisor</th>
+      <td mat-cell *matCellDef="let row"class="right-align"[ngClass]="{'negative': row.flujoEmisor! < 0 }">{{  formatNumberWithStyle(row.flujoEmisor) }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="flujoEmisorEscudo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Flujo Emisor c/Escudo</th>
+      <td mat-cell *matCellDef="let row"class="right-align"[ngClass]="{'negative': row.flujoEmisorEscudo! < 0 }">{{formatNumberWithStyle(row.flujoEmisorEscudo) }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="flujoBonista">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Flujo Bonista</th>
+      <td mat-cell *matCellDef="let row" class="right-align"
+          [ngClass]="{ 'negative': row.flujoBonista! < 0 }">
+        {{ formatNumberWithStyle(row.flujoBonista) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="flujoActualizado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Flujo Act.</th>
+      <td mat-cell *matCellDef="let row"class="right-align"[ngClass]="{ 'empty-cell': row.nro === 0 && row.flujoActualizado === null , 'negative': row.flujoActualizado! < 0 }">
+        {{ formatNumberWithStyle(row.flujoActualizado)}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="faPorPlazo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">FA x Plazo</th>
+      <td mat-cell *matCellDef="let row"class="right-align"[ngClass]="{ 'empty-cell': row.nro === 0 && row.faPorPlazo === null , 'negative': row.faPorPlazo! < 0 }">
+        {{ formatNumberWithStyle(row.faPorPlazo) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="factorConvexidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="center-cell">Factor p/Convexidad</th>
+      <td mat-cell *matCellDef="let row" class="right-align" [ngClass]="{ 'empty-cell': row.nro === 0 && row.factorConvexidad === null, 'negative': row.factorConvexidad! < 0  }">
+        {{ formatNumberWithStyle(row.factorConvexidad) }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="18">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of data"></mat-paginator>
+</div>
+

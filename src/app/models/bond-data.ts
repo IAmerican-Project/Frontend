@@ -1,0 +1,35 @@
+export interface BondData {
+  valorNominal: number;
+  valorComercial: number;
+  numeroAnios: number;
+  frecuenciaCupon: number;
+  diasCapitalizacion: number;
+  frecuenciaCuponTexto: string;
+  diasAnio: number;
+  tasaEfectivaAnual: number;
+  tipoTasaInteres: string;
+  capitalizacion: string;
+  tasaInteres: number;
+  tasaDescuentoAnual: number;
+  impuestoRenta: number;
+  fechaEmision: string;
+  prima: number;
+  estructuracion: number;
+  colocacion: number;
+  flotacion: number;
+  cavali: number;
+  costesInicialesEmisor: number;
+  costesInicialesBonista: number;
+  numeroPeriodosAnio: number;
+  numeroTotalPeriodos: number;
+  tasaEfectivaSemestral: number;
+  cokSemestral: number;
+  precioActual: number;
+  utilidad: number;
+  duracion: number;
+  convexidad: number;
+  duracionModificada: number;
+  tceaEmisor: number;
+  tceaEmisorEscudo: number;
+  treaBonista: number;
+}

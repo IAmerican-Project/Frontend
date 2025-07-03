@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DataService} from "../services/data.service";
+import {TablaFlujoComponent} from "../public/tablaamericano/tablaamericano";
 
 @Component({
   selector: 'app-results',
   imports: [
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    TablaFlujoComponent
   ],
   templateUrl: 'results.html',
   standalone: true,

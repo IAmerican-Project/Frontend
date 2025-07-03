@@ -1,9 +1,11 @@
 import {
+  _CdkPrivateStyleLoader
+} from "./chunk-ITGWM2IH.js";
+import {
   Platform,
-  _CdkPrivateStyleLoader,
   coerceElement,
   coerceNumberProperty
-} from "./chunk-H6OOTIWJ.js";
+} from "./chunk-GIRLZHWZ.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -31,7 +33,7 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵlistener
-} from "./chunk-GDTMXSMZ.js";
+} from "./chunk-2M2EHFEH.js";
 
 // node_modules/@angular/cdk/fesm2022/text-field.mjs
 var _CdkTextFieldStyleLoader = class __CdkTextFieldStyleLoader {
@@ -501,4 +503,4 @@ export {
   CdkTextareaAutosize,
   TextFieldModule
 };
-//# sourceMappingURL=chunk-HDZFJ3GA.js.map
+//# sourceMappingURL=chunk-LI4VWG4A.js.map
