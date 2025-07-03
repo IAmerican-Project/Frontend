@@ -1,0 +1,22 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+/* Ajusta los botones para que coincidan con tu estilo */
+a[mat-button],
+button[mat-button] {
+    font-weight: 500;
+    margin-left: 8px;
+}

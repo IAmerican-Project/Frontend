@@ -1,12 +1,14 @@
 import {
+  _animationsDisabled
+} from "./chunk-MJRE4TKU.js";
+import {
   FocusMonitor,
   MatCommonModule,
-  _animationsDisabled,
   _getEventTarget,
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader,
   normalizePassiveListenerOptions
-} from "./chunk-D3XTR6GL.js";
+} from "./chunk-5633V2OT.js";
 import "./chunk-OWWW2ERU.js";
 import {
   Platform,
