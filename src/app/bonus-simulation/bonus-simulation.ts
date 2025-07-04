@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {DataService} from "../services/data.service";
 import {BondDataService} from "../services/bond-data.service";
+import {DataBonoService} from "../services/data-bono.service";
+import { InfoDataBono } from '../models/data_bono';
 
 @Component({
   selector: 'app-bonus-simulation',
@@ -13,7 +15,7 @@ import {BondDataService} from "../services/bond-data.service";
   styleUrls: ['bonus-simulation.css']
 })
 export class CalculadoraMultiplicacion {
-  constructor(private dataService: DataService, private router: Router, private bondDataService: BondDataService) { }
+  constructor(private dataService: DataService, private router: Router, private bondDataService: BondDataService, private dataBonoService :DataBonoService) { }
 
   precio_comercial: number | null = null;
   cantidad_anios: number | null = null;
@@ -32,7 +34,8 @@ export class CalculadoraMultiplicacion {
   prima: number | null = null;
   valor_nominal_bono: number | null = null;
 
-  guardarDatos(): void {
+  guardarTodo(): void {
+    // Guarda en DataService
     this.dataService.datosCalculadora = {
       valor_comercial: this.precio_comercial,
       valor_nominal_bono: this.valor_nominal_bono,
@@ -51,11 +54,28 @@ export class CalculadoraMultiplicacion {
       cavali: (this.cavali ?? 0) / 100
     };
 
+    // Guarda en DataBonoService
+    const infoBono: InfoDataBono = {
+      i_valor_nominal_bono: this.valor_nominal_bono,
+      i_precio_comercial: this.precio_comercial,
+      i_numero_de_anios: this.cantidad_anios,
+      i_frecuencia_cupones: this.frecuencia_cupones,
+      i_dias_capitalizacion: this.dias_capitalizacion,
+      i_dias_anio: this.dias_anio,
+      i_tasa_interes:(this.tasa_anual ?? 0) / 100,/////
+      i_tasa_descuento_anual: (this.tasa_descuento ?? 0)/100,
+      i_impuesto_renta: (this.impuesto_renta ?? 0) / 100,
+      i_prima: (this.prima ?? 0)/100,
+      i_estructuracion: (this.estructuracion ?? 0)/100,
+      i_colocacion: (this.colocacion ?? 0)/100,
+      i_flotacion: (this.flotacion ?? 0)/100,
+      i_cavali: (this.cavali ?? 0)/100
+    };
+    this.dataBonoService.setInfoBondData(infoBono);
 
-
+    // Redirige a /results
     this.router.navigate(['/results']);
   }
-
   get primaDecimal(): number {
     return (this.prima ?? 0) / 100;
   }

@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {BondData} from '../../models/bond-data';
 import {BondDataService} from '../../services/bond-data.service';
 import {NgClass} from '@angular/common';
+
 export interface FlujoDatos {
   nro: number;
   fechaProgramada: string | null;
@@ -100,7 +101,7 @@ export class TablaFlujoComponent implements AfterViewInit {
 
 
 
-    const baseDate = new Date(this.bondData.fechaEmision);
+    const baseDate = new Date(this.bondData.fechaEmision ?? new Date());
     const frecuencia = this.bondData.frecuenciaCupon; // 180 días
 
     // Fila 0 (fecha de emisión)

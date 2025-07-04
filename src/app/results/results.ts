@@ -3,6 +3,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataService } from "../services/data.service";
 import { TablaFlujoComponent } from "../public/tablaamericano/tablaamericano";
 import { BondDataService } from "../services/bond-data.service";
+import {InfoDataBono} from "../models/data_bono";
+import {DataBonoService} from "../services/data-bono.service";
 
 @Component({
   selector: 'app-results',
@@ -32,10 +34,12 @@ export class Results {
   total_periodos: any;
   tasa_efectiva: any;
   cok: any;
+  infoDataBono: InfoDataBono | null = null;
 
   constructor(
       private dataService: DataService,
-      private bondService: BondDataService
+      private bondService: BondDataService,
+      private dataBonoService: DataBonoService
   ) {
     const datos = this.dataService.datosCalculadora;
 
@@ -46,27 +50,28 @@ export class Results {
     this.cok = this.Cok(datos);//
     this.tasa_efectiva_anual = this.tasaEfectivaAnual(datos);//
     this.tasa_efectiva = this.tasaEfectiva(datos); //
+    const infoDataBono = this.dataBonoService.getInfoBondData();
 
     const bondData = {
-      valorNominal: 1000.00,
-      valorComercial: 1050.00,
-      numeroAnios: 3,
-      frecuenciaCupon: 180,
-      diasCapitalizacion: 60,//<-- Días de capitalización
+      valorNominal: infoDataBono?.i_valor_nominal_bono ?? 0,
+      valorComercial: infoDataBono?.i_precio_comercial ?? 0,
+      numeroAnios: infoDataBono?.i_numero_de_anios ?? 0,
+      frecuenciaCupon: infoDataBono?.i_frecuencia_cupones ?? 0,
+      diasCapitalizacion: infoDataBono?.i_dias_capitalizacion ?? 0,//<-- Días de capitalización
       frecuenciaCuponTexto: '',
-      diasAnio: 360,
+      diasAnio: infoDataBono?.i_dias_anio ?? 360,
       tasaEfectivaAnual: this.tasa_efectiva_anual,
       tipoTasaInteres: '',
       capitalizacion: '', //dias de capitalizacion
-      tasaInteres: 0.09,
-      tasaDescuentoAnual: 0.06,
-      impuestoRenta: 0.30,
+      tasaInteres: infoDataBono?.i_tasa_interes ?? 0,
+      tasaDescuentoAnual: infoDataBono?.i_tasa_descuento_anual ?? 0 ,
+      impuestoRenta: infoDataBono?.i_impuesto_renta ?? 0,
       fechaEmision: '05-01-2022',
-      prima: 0.01,
-      estructuracion: 0.0045,
-      colocacion: 0.0025,
-      flotacion: 0.0015,
-      cavali: 0.005,
+      prima: infoDataBono?.i_prima ?? 0,
+      estructuracion: infoDataBono?.i_estructuracion ?? 0,
+      colocacion:  infoDataBono?.i_colocacion ?? 0,
+      flotacion: infoDataBono?.i_flotacion ?? 0,
+      cavali: infoDataBono?.i_cavali ?? 0,
       costesInicialesEmisor: this.costes_iniciales_emisor,
       costesInicialesBonista: this.costes_iniciales_bonista,
       numeroPeriodosAnio: this.numero_periodos_anio,
