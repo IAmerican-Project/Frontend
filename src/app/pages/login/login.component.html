@@ -32,6 +32,8 @@
                 ¿No tienes cuenta?
                 <a [routerLink]="['/register']" style="color: #5a32ea; font-weight: bold;">REGISTRARSE</a>
             </div>
+            <p *ngIf="error" style="color: red; font-weight: bold;">Correo o contraseña inválidos.</p>
+
         </form>
     </div>
 

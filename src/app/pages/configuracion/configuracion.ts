@@ -7,17 +7,19 @@ import { MatInputModule     } from '@angular/material/input';
 import { MatButtonModule    } from '@angular/material/button';
 import {ParametrosSistemaService} from "../../services/parametros.sistema.services";
 import {ParametrosSistema} from "../../models/parametros-sistema.model";
+import {Navbar} from "../../shared/navbar/navbar";
 
 @Component({
   selector: 'app-configuracion',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        Navbar
+    ],
   templateUrl: './configuracion.html',
   styleUrls: ['./configuracion.css'],
 })

@@ -6,11 +6,12 @@ import {DataService} from "../services/data.service";
 import {BondDataService} from "../services/bond-data.service";
 import {DataBonoService} from "../services/data-bono.service";
 import { InfoDataBono } from '../models/data_bono';
+import {Navbar} from "../shared/navbar/navbar";
 
 @Component({
   selector: 'app-bonus-simulation',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+    imports: [FormsModule, CommonModule, Navbar],
   templateUrl: 'bonus-simulation.html',
   styleUrls: ['bonus-simulation.css']
 })
