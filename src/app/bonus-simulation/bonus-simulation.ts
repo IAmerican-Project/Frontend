@@ -51,8 +51,10 @@ export class CalculadoraMultiplicacion {
       estructuracion: (this.estructuracion ?? 0) / 100,
       colocacion: (this.colocacion ?? 0) / 100,
       flotacion: (this.flotacion ?? 0) / 100,
-      cavali: (this.cavali ?? 0) / 100
+      cavali: (this.cavali ?? 0) / 100,
+      fecha_emision: this.fecha_emision
     };
+
 
     // Guarda en DataBonoService
     const infoBono: InfoDataBono = {

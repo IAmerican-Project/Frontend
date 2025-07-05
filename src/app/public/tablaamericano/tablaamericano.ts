@@ -107,7 +107,9 @@ export class TablaFlujoComponent implements AfterViewInit {
     // Fila 0 (fecha de emisión)
     filas.push({
       nro: 0,
-      fechaProgramada: this.bondData.fechaEmision, // formato DD/MM/YYYY
+      fechaProgramada: this.formatDate(
+          new Date(new Date(this.bondData.fechaEmision).setDate(new Date(this.bondData.fechaEmision).getDate() + 1))
+      ),
       inflacionAnual: null,
       inflacionSemestral: null,
       plazoGracia: null,
@@ -137,8 +139,8 @@ export class TablaFlujoComponent implements AfterViewInit {
       }
       const inflacionAnual = 0.00;
       const inflacionSemestral = (i <= this.bondData.numeroTotalPeriodos)
-        ? ((Math.pow(1 + inflacionAnual / 100, frecuencia / this.bondData.diasAnio) - 1) * 100)
-        : 0;
+          ? ((Math.pow(1 + inflacionAnual / 100, frecuencia / this.bondData.diasAnio) - 1) * 100)
+          : 0;
       const rowAnterior = filas[i - 1];
       let bonoCalculado = 0;
       if (i === 1) {
@@ -171,8 +173,8 @@ export class TablaFlujoComponent implements AfterViewInit {
 
       }
       const prima = (i === this.bondData.numeroTotalPeriodos)
-        ? -1 * (this.bondData.prima * this.bondData.valorNominal)
-        : 0;
+          ? -1 * (this.bondData.prima * this.bondData.valorNominal)
+          : 0;
       const escudo =  ((-cuponInteres) * this.bondData.impuestoRenta);
       let flujoEmisorN = 0;
       if (i <= this.bondData.numeroTotalPeriodos) {

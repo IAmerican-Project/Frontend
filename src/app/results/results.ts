@@ -3,8 +3,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataService } from "../services/data.service";
 import { TablaFlujoComponent } from "../public/tablaamericano/tablaamericano";
 import { BondDataService } from "../services/bond-data.service";
-import {InfoDataBono} from "../models/data_bono";
-import {DataBonoService} from "../services/data-bono.service";
+import { InfoDataBono } from "../models/data_bono";
+import { DataBonoService } from "../services/data-bono.service";
+import { FlujoService } from "../services/flujo.service"; // NUEVO
 
 @Component({
   selector: 'app-results',
@@ -27,19 +28,21 @@ export class Results {
   costes_iniciales_bonista: any;
   precio_actual: any;
   utilidad: any;
-  tce: any;
-  trea: any;
-  tcea: any;
+  tce: number;
+  trea: number;
+  tcea: number;
   numero_periodos_anio: any;
   total_periodos: any;
   tasa_efectiva: any;
   cok: any;
   infoDataBono: InfoDataBono | null = null;
 
+
   constructor(
       private dataService: DataService,
       private bondService: BondDataService,
-      private dataBonoService: DataBonoService
+      private dataBonoService: DataBonoService,
+      private flujoService: FlujoService // NUEVO
   ) {
     const datos = this.dataService.datosCalculadora;
 
@@ -47,9 +50,11 @@ export class Results {
     this.costes_iniciales_bonista = this.calcularCostosInicialesBonista(datos);
     this.numero_periodos_anio = this.numeroPeriodosAnio(datos);
     this.total_periodos = this.totalPeriodos(datos);
-    this.cok = this.Cok(datos);//
-    this.tasa_efectiva_anual = this.tasaEfectivaAnual(datos);//
-    this.tasa_efectiva = this.tasaEfectiva(datos); //
+    this.cok = this.Cok(datos);
+    this.tasa_efectiva_anual = this.tasaEfectivaAnual(datos);
+    this.tasa_efectiva = this.tasaEfectiva(datos);
+
+
     const infoDataBono = this.dataBonoService.getInfoBondData();
 
     const bondData = {
@@ -57,41 +62,56 @@ export class Results {
       valorComercial: infoDataBono?.i_precio_comercial ?? 0,
       numeroAnios: infoDataBono?.i_numero_de_anios ?? 0,
       frecuenciaCupon: infoDataBono?.i_frecuencia_cupones ?? 0,
-      diasCapitalizacion: infoDataBono?.i_dias_capitalizacion ?? 0,//<-- Días de capitalización
+      diasCapitalizacion: infoDataBono?.i_dias_capitalizacion ?? 0,
       frecuenciaCuponTexto: '',
       diasAnio: infoDataBono?.i_dias_anio ?? 360,
       tasaEfectivaAnual: this.tasa_efectiva_anual,
       tipoTasaInteres: '',
-      capitalizacion: '', //dias de capitalizacion
+      capitalizacion: '',
       tasaInteres: infoDataBono?.i_tasa_interes ?? 0,
-      tasaDescuentoAnual: infoDataBono?.i_tasa_descuento_anual ?? 0 ,
+      tasaDescuentoAnual: infoDataBono?.i_tasa_descuento_anual ?? 0,
       impuestoRenta: infoDataBono?.i_impuesto_renta ?? 0,
-      fechaEmision: '05-01-2022',
+      fechaEmision: datos.fecha_emision,
       prima: infoDataBono?.i_prima ?? 0,
       estructuracion: infoDataBono?.i_estructuracion ?? 0,
-      colocacion:  infoDataBono?.i_colocacion ?? 0,
+      colocacion: infoDataBono?.i_colocacion ?? 0,
       flotacion: infoDataBono?.i_flotacion ?? 0,
       cavali: infoDataBono?.i_cavali ?? 0,
       costesInicialesEmisor: this.costes_iniciales_emisor,
       costesInicialesBonista: this.costes_iniciales_bonista,
       numeroPeriodosAnio: this.numero_periodos_anio,
-      numeroTotalPeriodos:  this.total_periodos,
+      numeroTotalPeriodos: this.total_periodos,
       tasaEfectivaSemestral: this.tasa_efectiva,
       cokSemestral: this.cok,
-      precioActual:0,
-      utilidad:0,
-      duracion:0,
+      precioActual: 0,
+      utilidad: 0,
+      duracion: 0,
       convexidad: 0,
       duracionModificada: 0,
       tceaEmisor: 0,
       tceaEmisorEscudo: 0,
-      treaBonista: 0
+      treaBonista: 0,
+
     };
 
     this.bondService.setBondData(bondData);
+
+    const flujo = this.flujoService.generarFlujo(bondData);
+
+
+    this.precio_actual = this.flujoService.calcularPrecioActual(flujo, bondData.cokSemestral);
+    this.utilidad = -this.flujoService.calcularUtilidad(flujo, this.precio_actual);
+    this.duracion = this.flujoService.calcularDuracion(flujo);
+    this.convexidad = this.flujoService.calcularConvexidad(flujo, bondData.cokSemestral, bondData.numeroTotalPeriodos);
+    this.total_ratios = Number((this.duracion + this.convexidad).toFixed(6));
+    this.duracion_modificada = Number((this.duracion / (1 + this.cok)).toFixed(6));
+    this.tce = this.flujoService.calcularTCEAEmisor(flujo);
+    this.tcea = this.flujoService.calcularTCEAEmisorConEscudo(flujo);
+    this.trea = this.flujoService.calcularTREA(flujo);
+
+
   }
 
-  // 🔧 Métodos auxiliares que faltaban
 
   calcularCostosInicialesEmisor(datos: any): number {
     const { estructuracion, colocacion, flotacion, cavali, valor_comercial } = datos;
@@ -141,4 +161,6 @@ export class Results {
     const tasa_semestral = Math.pow(1 + tasa_efectiva_anual, exponente) - 1;
     return Number(tasa_semestral.toFixed(6));
   }
+
+
 }
