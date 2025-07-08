@@ -5,15 +5,17 @@ import { TablaFlujoComponent } from "../public/tablaamericano/tablaamericano";
 import { BondDataService } from "../services/bond-data.service";
 import { InfoDataBono } from "../models/data_bono";
 import { DataBonoService } from "../services/data-bono.service";
-import { FlujoService } from "../services/flujo.service"; 
+import { FlujoService } from "../services/flujo.service";
+import {Navbar} from "../shared/navbar/navbar";
 
 @Component({
   selector: 'app-results',
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    TablaFlujoComponent
-  ],
+    imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        TablaFlujoComponent,
+        Navbar
+    ],
   templateUrl: 'results.html',
   standalone: true,
   styleUrl: 'results.css'

@@ -7,46 +7,73 @@
         <div class="form-card">
             <h2 class="form-title">Registrarse</h2>
 
-            <form (submit)="onSubmit($event)">
-                <label for="firstName">Nombres</label>
+            <form (submit)="onSubmit($event)" #registerForm="ngForm">
+                <!-- Nombre completo -->
+                <label for="username">Nombre de Usuario</label>
                 <div class="input-icon">
-                    <input id="firstName" type="text" placeholder="Tu nombre" required />
+                    <input
+                            id="username"
+                            name="username"
+                            type="text"
+                            placeholder="Tu nombre completo"
+                            required
+                            [(ngModel)]="username"
+                    />
                 </div>
 
-                <label for="lastName">Apellidos</label>
-                <div class="input-icon">
-                    <input id="lastName" type="text" placeholder="Tus apellidos" required />
-                </div>
-
+                <!-- Correo -->
                 <label for="email">Correo electrónico</label>
                 <div class="input-icon">
-                    <input id="email" type="email" placeholder="correo@example.com" required />
+                    <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="correo@example.com"
+                            required
+                            [(ngModel)]="email"
+                    />
                 </div>
+
+                <!-- Contraseña -->
                 <label for="password">Contraseña</label>
                 <div class="input-icon">
                     <input
                             id="password"
+                            name="password"
                             [type]="showPassword ? 'text' : 'password'"
                             placeholder="********"
-                            required />
+                            required
+                            [(ngModel)]="password"
+                    />
                     <span class="material-icons" (click)="togglePassword()">
             {{ showPassword ? 'visibility_off' : 'visibility' }}
           </span>
                 </div>
 
+                <!-- Confirmar contraseña -->
                 <label for="confirmPassword">Confirmar Contraseña</label>
                 <div class="input-icon">
                     <input
                             id="confirmPassword"
+                            name="confirmPassword"
                             [type]="showConfirmPassword ? 'text' : 'password'"
                             placeholder="********"
-                            required />
+                            required
+                            [(ngModel)]="confirmPassword"
+                    />
                     <span class="material-icons" (click)="toggleConfirmPassword()">
             {{ showConfirmPassword ? 'visibility_off' : 'visibility' }}
           </span>
                 </div>
 
-                <button type="submit" class="submit-button">Registrarse</button>
+                <!-- Botón -->
+                <button
+                        type="submit"
+                        class="submit-button"
+                        [disabled]="!registerForm.form.valid"
+                >
+                    Registrarse
+                </button>
             </form>
         </div>
     </main>

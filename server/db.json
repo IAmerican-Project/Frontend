@@ -1,12 +1,103 @@
 {
+  "usuarios": [
+    {
+      "user_id": 1,
+      "username": "nicolasv",
+      "email": "nicolas@example.com",
+      "password": "1234",
+      "user_type": "admin",
+      "registration_date": "2025-07-01T12:00:00Z",
+      "id": "df91"
+    }
+  ],
+  "bonos": [
+    {
+      "bond_id": 1,
+      "user_id": 1,
+      "face_value": 10000,
+      "commercial_value": 9500,
+      "years": 5,
+      "coupon_frequency": 2,
+      "capitalization_days": 180,
+      "interest_rate_type": "nominal",
+      "annual_rate": 0.1,
+      "discount_rate": 0.08,
+      "interest_tax": 0.05,
+      "issue_date": "2025-07-01",
+      "id": "550a"
+    }
+  ],
+  "gastos_iniciales": [
+    {
+      "expenses_id": 1,
+      "bond_id": 1,
+      "cost_structure_pct": 0.01,
+      "cost_placement_pct": 0.02,
+      "cost_floating_pct": 0.015,
+      "cost_cavali_pct": 0.005,
+      "id": "044c"
+    }
+  ],
+  "flujo_caja": [
+    {
+      "cashflow_id": 1,
+      "bond_id": 1,
+      "period_number": 1,
+      "interest_payment": 500,
+      "capital_payment": 0,
+      "total_payment": 500,
+      "date": "2026-01-01",
+      "id": "8ee7"
+    }
+  ],
+  "resultados_financieros": [
+    {
+      "result_id": 1,
+      "bond_id": 1,
+      "TCEA_issuer": 0.12,
+      "TCEA_issuer_shield": 0.11,
+      "TREA_bonista": 0.09,
+      "duration": 4.5,
+      "modified_duration": 4.3,
+      "convexity": 0.85,
+      "current_price": 9800,
+      "profit": 300,
+      "id": "01ec"
+    }
+  ],
+  "reportes": [
+    {
+      "report_id": 1,
+      "bond_id": 1,
+      "total_cost": 500,
+      "total_installments": 10,
+      "net_present_value": 9750,
+      "effective_rate": 0.094,
+      "generation_date": "2025-07-01T12:00:00Z",
+      "estado": "generado",
+      "id": "70a0"
+    }
+  ],
   "parametros_sistema": [
     {
-      "currency_default": "Sol peruano",
-      "days_in_year": 363,
-      "vat_rate": 4,
-      "income_tax_rate": 3,
       "parametro_id": 1,
-      "id": "1"
+      "currency_default": "PEN",
+      "vat_rate": 0.18,
+      "income_tax_rate": 0.3,
+      "days_in_year": 360,
+      "tasa_descuento_referencial": 0.07,
+      "fecha_configuracion": "2025-07-01T12:00:00Z",
+      "id": "c954"
+    }
+  ],
+  "logs_usuarios": [
+    {
+      "log_id": 1,
+      "user_id": 1,
+      "accion": "Login exitoso",
+      "ip_address": "192.168.0.10",
+      "fecha_hora": "2025-07-01T12:01:00Z",
+      "id": "8478"
     }
   ]
 }
